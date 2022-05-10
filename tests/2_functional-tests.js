@@ -60,27 +60,27 @@ suite('Functional Tests', function () {
           }
         )
         .end(function (err, res) {
-          assert.equal(res.status, 200,'status error = ' + res.status);
-          assert.equal(res.type, 'application/json', 'type error = '+ res.type);
-          assert.equal(res.body.name, 'Giovanni', 'body.name error = ' + res.body.name);
-          assert.equal(res.body.surname , 'da Verrazzano', 'surname error = ' + res.body.surname);
+          assert.equal(res.status, 200);
+          assert.equal(res.type, 'application/json');
+          assert.equal(res.body.name, 'Giovanni');
+          assert.equal(res.body.surname , 'da Verrazzano');
           done();
         });
     });
   });
 });
 
-const Browser = require('https://fcc-mochachai.mrfz.repl.co');
+const Browser = require('zombie');
+Browser.site = 'https://fcc-mochachai.mrfz.repl.co';
 
 suite('Functional Tests with Zombie.js', function () {
-const browser = new Browser();
-  
+  this.timeout(5000);
+  const browser = new Browser();
   suiteSetup(function(done) {
   return browser.visit('/', done);
 });
   
-  this.timeout(5000);
-  
+
 
   suite('Headless browser', function () {
     test('should have a working "site" property', function() {
